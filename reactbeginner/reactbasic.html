@@ -7,30 +7,63 @@
   <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
   <!-- impore react-dom. React element를 Html body 안에 두개 도와준다. -->
   <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
-  <script>
+  <!-- JSX를 변환하기 위한 Babel 설치. -->
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <!-- React 코드 작성. type으로 React 코드를 작성하고 있다는걸 명시해야 한다. -->
+  <script type="text/babel">
     const root = document.getElementById("root");
     // 1. React element를 생성한다.
     // 하나의 변수 선언에서 작성해야 하는 코드 대부분을 넣을 수 있다!
-    const h3 = React.createElement(
-      "h3",
-      {
-        id: "sexy-span",
-        style: { color: "red" },
-        onMouseEnter: () => console.log("Mouse Enter"),
-      },
-      "h3 HERE!"
+    /*
+      const h3 = React.createElement(
+        "h3",
+        {
+          id: "sexy-span",
+          style: { color: "red" },
+          onMouseEnter: () => console.log("Mouse Enter"),
+        },
+        "h3 HERE!"
+      );
+      */
+    // JSX 를 사용해서 위의 코드를 훨씬 간단히 작성할 수 있다. 일반적인 Html과 굉장히 유사하다. 반드시 컴포넌트의 첫글자는 대문자!
+    const Title = () => (
+      <h3 id="title" onMouseEnter={() => console.log("MOUSE ON")}>
+        Hello I'm Title
+      </h3>
     );
-    const btn = React.createElement(
-      "button",
-      {
-        style: { backgroundColor: "tomato" },
-        onClick: () => console.log("CLICK"),
-      },
-      "Click me!"
+    /*
+      const btn = React.createElement(
+        "button",
+        {
+          style: { backgroundColor: "tomato" },
+          onClick: () => console.log("CLICK"),
+        },
+        "Click me!"
+      );
+      */
+    // JSX 를 사용해서 위의 코드를 훨씬 간단히 작성할 수 있다. 일반적인 Html과 굉장히 유사하다. 반드시 컴포넌트의 첫글자는 대문자!
+    const Button = () => (
+      <button
+        style={{
+          backgroundColor: "tomato",
+        }}
+        onClick={() => console.log("CLICK")}
+      >
+        CLICK ME!
+      </button>
     );
+
     // h3와 btn을 같이 넣기 위해 하나의 태그에 넣는다.
-    const container = React.createElement("div", null, [h3, btn]);
+    // const container = React.createElement("div", null, [Title, Button]);
+    // JSX를 사용한 Container 생성, 컴포넌트명 그대로 반드시 첫글자는 대문자로 작성해야 한다.
+    const Container = () => (
+      <div>
+        <Title />
+        <Button />
+      </div>
+    );
     // 2. React dom을 이용해 React element를 Html body에 배치한다.
-    ReactDOM.render(container, root);
+    // React JS는 렌더링 할 때 이전과 다른 부분을 확인하교 변한부분만 업데이트 한다. 기존의 바닐라 JS는 모든것을 다시 렌더링 함. 엄청난 강점!
+    ReactDOM.render(<Container />, root);
   </script>
 </html>
