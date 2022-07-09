@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+  <body>
+    <div id="root"></div>
+  </body>
+  <!-- import react. Interactive한 UI를 만들게 도와준다. -->
+  <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
+  <!-- impore react-dom. React element를 Html body 안에 두개 도와준다. -->
+  <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+  <script>
+    const root = document.getElementById("root");
+    // 1. React element를 생성한다.
+    // 하나의 변수 선언에서 작성해야 하는 코드 대부분을 넣을 수 있다!
+    const h3 = React.createElement(
+      "h3",
+      {
+        id: "sexy-span",
+        style: { color: "red" },
+        onMouseEnter: () => console.log("Mouse Enter"),
+      },
+      "h3 HERE!"
+    );
+    const btn = React.createElement(
+      "button",
+      {
+        style: { backgroundColor: "tomato" },
+        onClick: () => console.log("CLICK"),
+      },
+      "Click me!"
+    );
+    // h3와 btn을 같이 넣기 위해 하나의 태그에 넣는다.
+    const container = React.createElement("div", null, [h3, btn]);
+    // 2. React dom을 이용해 React element를 Html body에 배치한다.
+    ReactDOM.render(container, root);
+  </script>
+</html>
