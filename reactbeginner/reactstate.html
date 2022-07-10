@@ -11,22 +11,26 @@
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
   <!-- React 코드 작성. type으로 React 코드를 작성하고 있다는걸 명시해야 한다. -->
   <script type="text/babel">
-    const root = document.getElementById("root");
     function App() {
       // React.js는 State 라는 데이터를 저장하는 공간을 제공한다.
-      const data = React.useState(0);
-      console.log(data); // [초깃값, 변경 함수] -> [0, f]
       // 배열의 각각 이름을 정해주기. 자바스크립트 문법 const counter = data[0], const modifier = data[1] 과 동일하다.
-      const [counter, modifier] = data;
+      // [초깃값, 변경 함수(modifier)] -> [0, f]
+      let [counter, setCounter] = React.useState(0);
+      const onClick = () => {
+        // modifier를 이용해서 state, 즉 리액트가 저장하고 있는 값을 바꾸면 해당 값만 Html에서 리렌더링이 된다!
+        // setCounter(counter + 1); // counter는 다른곳에서 호출될 가능성이 존재.
+        setCounter((current) => current + 1); // current를 이용할 수 있다! current는 현재의 state 값을 의미한다. 리액트가 보장하는 값.
+      };
       return (
         <div>
-          <h3>Total Click : 0</h3>
-          <button>CLICK</button>
+          <h3>Total Click : {counter}</h3>
+          <button onClick={onClick}>CLICK</button>
         </div>
       );
     }
     // 2. React dom을 이용해 React element를 Html body에 배치한다.
     // 리액트의 렌더링은 변한부분만 업데이트하고, 이는 인터렉티브한 앱을 만드는데 큰 도움이 된다!
+    const root = document.getElementById("root");
     ReactDOM.render(<App />, root);
   </script>
 </html>

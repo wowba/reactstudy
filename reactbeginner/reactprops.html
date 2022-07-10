@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+  <body>
+    <div id="root"></div>
+  </body>
+  <!-- import react. Interactive한 UI를 만들게 도와준다. -->
+  <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
+  <!-- impore react-dom. React element를 Html body 안에 두개 도와준다. -->
+  <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+  <!-- JSX를 변환하기 위한 Babel 설치. -->
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <!-- props의 type을 확인해주는 패키지 -->
+  <script src="https://unpkg.com/prop-types@15.7.2/prop-types.js"></script>
+  <!-- React 코드 작성. type으로 React 코드를 작성하고 있다는걸 명시해야 한다. -->
+  <script type="text/babel">
+    // 함수형 컴포넌트는 단순히 JSX를 반환하는 함수이다.
+    // props는 단순히 컴포넌트가 받는 유일한 인자값이자 오브젝트이다.
+    // String int 말고 function도 넣을 수 있다!
+    function Btn(props) {
+      // rerender 확인 log
+      console.log(props.text);
+      return (
+        <button
+          onClick={props.onClick}
+          style={{
+            backgroundColor: "tomato",
+            color: "white",
+            padding: "10px 20px",
+            border: 0,
+            borderRadius: 10,
+            fontSize: props.fontSize,
+          }}
+        >
+          {props.text}
+        </button>
+      );
+    }
+    // Btn의 prop 타입 확인. 브라우저의 콘솔창에서 에러 확인 가능
+    Btn.propTypes = {
+      text: PropTypes.string.isRequired,
+      fontSize: PropTypes.number,
+    };
+    // 이렇게 선언하면 props의 변경이 없는 컴포넌트는 rerender 되지 않는다. 최적화!
+    const MemorizedBtn = React.memo(Btn);
+
+    function App() {
+      const [value, setValue] = React.useState("Save Changes");
+      // 자식이 가진 changeValue를 실행시키면 부모가 rerender 된다.
+      // 해당 컴포넌트의 props가 변경되지 않으면 memo를 통해 불러오지 말라고 지정할 수 있다.
+      const changeValue = () => setValue("Revert Change");
+      return (
+        <div>
+          <MemorizedBtn text={value} onClick={changeValue} fontSize={18} />
+          <MemorizedBtn text="Continue" fontSize={20} />
+        </div>
+      );
+    }
+    // 2. React dom을 이용해 React element를 Html body에 배치한다.
+    // 리액트의 렌더링은 변한부분만 업데이트하고, 이는 인터렉티브한 앱을 만드는데 큰 도움이 된다!
+    const root = document.getElementById("root");
+    ReactDOM.render(<App />, root);
+  </script>
+</html>
