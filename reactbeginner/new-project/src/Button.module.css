@@ -1,0 +1,7 @@
+/* 이름은 상관 없다.
+.module.css 만 뒤에 잘 붙어있으면, css를 모듈화 해서 사용 가능! */
+
+.btn {
+  color: white;
+  background-color: tomato;
+}
