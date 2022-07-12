@@ -7,3 +7,7 @@
 3. npx create-react-app [PROJECT_NAME]
 
 4. 해당 프로젝트 이름을 가지는 폴더 내에 리액트 프로젝트가 생성된다.
+
+# React Router 설치하기
+
+1. npm install react-router-dom
