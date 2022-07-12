@@ -1,5 +1,6 @@
 // Router에는 브라우저 라우터, 해쉬 라우터 두 종류가 있다.
 // Switch의 역할은 Route를 찾는것이고, Route는 보통 URL을 말한다. 찾으면 그걸 렌더링 한다.
+// 6.3버전은 Switch를 사용하지 않는다. Route가 대신하며, element를 사용해 불러와야 하는 컴포넌트를 가져온다.
 import { Routes, Route, BrowserRouter } from "react-router-dom";
 
 import Home from "./routes/Home";

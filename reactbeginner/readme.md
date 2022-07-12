@@ -11,3 +11,7 @@
 # React Router 설치하기
 
 1. npm install react-router-dom
+
+# 깃헙 페이지에 퍼블리싱 하기
+
+1. npm i gh-pages
